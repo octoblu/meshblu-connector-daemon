@@ -29,7 +29,11 @@ class MeshbluConnectorDaemon {
             MESHBLU_DOMAIN: this.domain,
           },
         },
-        callback
+        (error, proc) => {
+          pm2.disconnect(() => {
+            callback(error, proc)
+          })
+        }
       )
     })
   }
