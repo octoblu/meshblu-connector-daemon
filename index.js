@@ -1,5 +1,5 @@
 const path = require("path")
-const forever = require("forever-monitor")
+const pm2 = require("pm2")
 
 class MeshbluConnectorDaemon {
   constructor({ type, uuid, token, domain }) {
@@ -9,30 +9,28 @@ class MeshbluConnectorDaemon {
     this.domain = domain
   }
 
-  create() {
+  start(callback) {
     const connectorPath = path.resolve(path.join("..", this.type))
     const cmd = path.join(connectorPath, this.type)
-    const child = new forever.Monitor(cmd, {
-      max: 3,
-      silent: true,
-      env: {
-        MESHBLU_UUID: this.uuid,
-        MESHBLU_TOKEN: this.token,
-        MESHBLU_DOMAIN: this.domain,
-      },
-      cwd: connectorPath,
+    pm2.connect(false, error => {
+      if (error) return callback(error)
+      pm2.start(
+        {
+          name: `${this.type}-${this.uuid}`,
+          script: cmd,
+          cwd: connectorPath,
+          restartDelay: 5000,
+          interpreter: "none",
+          force: true,
+          env: {
+            MESHBLU_UUID: this.uuid,
+            MESHBLU_TOKEN: this.token,
+            MESHBLU_DOMAIN: this.domain,
+          },
+        },
+        callback
+      )
     })
-
-    this.child = child
-    return child
-  }
-
-  start() {
-    this.child.start()
-  }
-
-  stop() {
-    this.child.stop()
   }
 }
 

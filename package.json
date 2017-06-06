@@ -1,6 +1,6 @@
 {
   "name": "meshblu-connector-daemon",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Daemonize a meshblu-connector",
   "main": "index.js",
   "scripts": {
@@ -21,6 +21,6 @@
   },
   "homepage": "https://github.com/octoblu/meshblu-connector-daemon#readme",
   "dependencies": {
-    "forever-monitor": "^1.7.1"
+    "pm2": "^2.4.6"
   }
 }
