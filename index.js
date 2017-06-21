@@ -1,48 +1,44 @@
 const path = require("path")
-const pm2 = require("pm2")
+const PM2 = require("pm2").custom
 
 class MeshbluConnectorDaemon {
-  constructor({ type, uuid, token, domain, connectorsPath }) {
+  constructor({ type, uuid, token, domain, connectorsPath, pm2Home }) {
     this.type = type
     this.uuid = uuid
     this.token = token
     this.domain = domain
     this.connectorsPath = connectorsPath
+    this.pm2Home = pm2Home || process.env.PM2_HOME
+    this.pm2 = new PM2({ pm2_home: this.pm2Home })
   }
 
   connect() {
     return new Promise((resolve, reject) => {
-      pm2.connect(false, error => {
+      this.pm2.connect(false, error => {
         if (error) return reject(error)
-        resolve()
+        return resolve()
       })
     })
   }
 
   disconnect() {
     return new Promise((resolve, reject) => {
-      pm2.disconnect(error => {
+      this.pm2.disconnect(error => {
         if (error) return reject(error)
-        resolve()
+        return resolve()
       })
     })
   }
 
   start() {
     const connectorPath = path.resolve(path.join(this.connectorsPath, this.type))
-    return this.connect()
-      .then(() => {
-        return this.pm2_start({ connectorPath })
-      })
-      .then(() => {
-        return this.disconnect()
-      })
+    return this.connect().then(() => this.pm2_start({ connectorPath })).then(() => this.disconnect())
   }
 
   pm2_start({ connectorPath }) {
     return new Promise((resolve, reject) => {
       const cmd = path.join(connectorPath, this.type)
-      pm2.start(
+      this.pm2.start(
         {
           name: `${this.type}-${this.uuid}`,
           script: cmd,
@@ -60,7 +56,7 @@ class MeshbluConnectorDaemon {
         (error, proc) => {
           if (error) return reject(error)
           this.proc = proc
-          resolve(proc)
+          return resolve(proc)
         }
       )
     })
