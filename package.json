@@ -1,6 +1,6 @@
 {
   "name": "meshblu-connector-daemon",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Daemonize a meshblu-connector",
   "main": "index.js",
   "scripts": {

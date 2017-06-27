@@ -8,7 +8,7 @@ class MeshbluConnectorDaemon {
     this.token = token
     this.domain = domain
     this.connectorsPath = connectorsPath
-    this.pm2Home = pm2Home || process.env.PM2_HOME
+    this.pm2Home = pm2Home
     this.pm2 = new PM2({ pm2_home: this.pm2Home })
   }
 
