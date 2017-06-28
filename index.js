@@ -51,6 +51,7 @@ class MeshbluConnectorDaemon {
             MESHBLU_UUID: this.uuid,
             MESHBLU_TOKEN: this.token,
             MESHBLU_DOMAIN: this.domain,
+            DEBUG: process.env.DEBUG,
           },
         },
         (error, proc) => {
