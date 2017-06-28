@@ -1,5 +1,5 @@
 const path = require("path")
-const PM2 = require("pm2").custom
+const PM2 = require("pm2-custom")
 
 class MeshbluConnectorDaemon {
   constructor({ type, uuid, token, domain, connectorsPath, pm2Home }) {
