@@ -51,6 +51,7 @@ class MeshbluConnectorDaemon {
             MESHBLU_UUID: this.uuid,
             MESHBLU_TOKEN: this.token,
             MESHBLU_DOMAIN: this.domain,
+            MESHBLU_RESOLVE_SRV: true,
             DEBUG: process.env.DEBUG,
           },
         },
