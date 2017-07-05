@@ -2,9 +2,9 @@
 # yarn lockfile v1
 
 
-"@octoblu/pm2@^2.6.0":
-  version "2.6.0"
-  resolved "https://registry.yarnpkg.com/@octoblu/pm2/-/pm2-2.6.0.tgz#b38caf133d643f9ead7448a88605e0620d66a370"
+"@octoblu/pm2@^2.6.1":
+  version "2.6.1"
+  resolved "https://registry.yarnpkg.com/@octoblu/pm2/-/pm2-2.6.1.tgz#c093c806f72313d365ca342dab8c3a327d76f3e9"
   dependencies:
     async "1.5"
     blessed "^0.1.81"
@@ -905,11 +905,11 @@ pm2-axon@3.0.2:
     debug "~2.2.0"
     escape-regexp "0.0.1"
 
-pm2-custom@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/pm2-custom/-/pm2-custom-1.0.1.tgz#77010f889c773a7639479e5da989a721c0b4a122"
+pm2-custom@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/pm2-custom/-/pm2-custom-1.0.2.tgz#6c7a38090ec1d127acb17f433730c5c75ab40db7"
   dependencies:
-    "@octoblu/pm2" "^2.6.0"
+    "@octoblu/pm2" "^2.6.1"
 
 pm2-deploy@^0.3.5:
   version "0.3.5"
